@@ -1,9 +1,10 @@
 #!/bin/bash
-  
+u = logname 
+echo $u
 awk -F: '{ print $1}' /etc/passwd > users.txt
 while read p; do
-	if [[ "$p" != "daugcal" ]] || [[ "$p" != "root" ]]; then
-		chsh -s /bin/nologin $p
+	if [[ "$p" != "$u" ]] || [[ "$p" != "root" ]]; then
+		chsh -s /bin/false $p
 		wall "Ooof, thats gotta hurt. Seeya!"
 		pkill -KILL -u $p
 	else
